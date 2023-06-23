@@ -82,7 +82,7 @@ def add_new_shelf(directories, new_num):
             shelves += f'{key}'
         else:
             shelves += f'{key} '
-    return f'The shelf was successfully added. {current_list_of_shelves(directories)}'
+    return f'The shelf was successfully added. {current_list_of_shelves(directories)}', directories
 
 
 def delete_a_shelf(directors, shelf_num):
@@ -91,7 +91,7 @@ def delete_a_shelf(directors, shelf_num):
     if directors[shelf_num] != list():
         return 'There are documents on the shelf, remove them before removing the shelf (print d to remove a document).'
     del directories[shelf_num]
-    return 'The shelf was deleted.'
+    return 'The shelf was deleted.', directories
 
 
 def add_new_doc(directories, documents):
@@ -107,7 +107,7 @@ def add_new_doc(directories, documents):
     document['name'] = owner
     documents.append(document)
     directories[shelf].append(num)
-    return 'The document was successfully added!'
+    return 'The document was successfully added!', directories, documents
 
 
 def delete_doc(directories, documents, doc):
@@ -122,7 +122,9 @@ def delete_doc(directories, documents, doc):
         if doc in d:
             d.remove(doc)
 
-    return 'The document is successfully deleted!'
+    result = ('The document is successfully deleted!', directories, documents)
+
+    return result
 
 
 def move_doc(doc, shelf, directories):
@@ -134,7 +136,7 @@ def move_doc(doc, shelf, directories):
     if a is None:
         return 'The document wasn\'t found on the shelf'
     directories[shelf].append(doc)
-    return 'The document was successfully moved!'
+    return 'The document was successfully moved!', directories
 
 
 def user_interaction(documents, directories):
@@ -149,7 +151,7 @@ def user_interaction(documents, directories):
     d = 'd'
     m = 'm'
     list_of_coms = 'lof'
-    clod = f'Current list of document: \n{show_full_doc_info(documents, directories)}'
+    clod = '\nCurrent list of document: \n'
 
     while command != finish:
         command = input('Enter the command, please: \n').lower()
@@ -163,21 +165,28 @@ def user_interaction(documents, directories):
             print(show_full_doc_info(documents, directories))
         elif command == new_shelf:
             new_shelf_num = input('Enter number of the new shelf: \n')
-            print(add_new_shelf(directories, new_shelf_num))
+            print(add_new_shelf(directories, new_shelf_num)[0])
+            directories = add_new_shelf(directories, new_shelf_num)[1]
         elif command == delete_shelf:
             to_be_deleted_shelf_num = input('Enter number of the shelf to delete: \n')
-            print(delete_a_shelf(directories, to_be_deleted_shelf_num), clod)
+            print(delete_a_shelf(directories, to_be_deleted_shelf_num)[0], clod)
+            directories = delete_a_shelf(directories, to_be_deleted_shelf_num)[1]
+            print(show_full_doc_info(documents, directories))
         elif command == doc_to_be_added:
-            print(add_new_doc(directories, documents))
-            print(clod)
+            print(add_new_doc(directories, documents)[0], clod)
+            directories, documents = add_new_doc(directories, documents)[1], add_new_doc(directories, documents)[2]
+            print(show_full_doc_info(documents, directories))
         elif command == d:
             doc_to_be_deleted = input('Enter number of a document to delete it: \n')
-            print(delete_doc(directories, documents, doc_to_be_deleted))
-            print(clod)
+            print(delete_doc(directories, documents, doc_to_be_deleted)[0], clod)
+            directories, documents = delete_doc(directories, documents, doc_to_be_deleted)[1], delete_doc(directories,
+                                                                                        documents, doc_to_be_deleted)[2]
+            print(show_full_doc_info(documents, directories))
         elif command == m:
             doc_to_move = input('Enter number of a document to move it: \n')
             shelf = input('Enter number of the shelf where to move: \n')
-            print(move_doc(doc_to_move, shelf, directories))
+            print(move_doc(doc_to_move, shelf, directories)[0])
+            directories = move_doc(doc_to_move, shelf, directories)[1]
             print(show_full_doc_info(documents, directories))
         elif command == list_of_coms:
             print(show_list_of_commands())
