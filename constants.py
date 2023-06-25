@@ -1,5 +1,5 @@
 PERSON = 'p'
-FINISH = 'q'  # ?
+QUIT = 'q'
 SHELF = 's'
 full_doc_info = 'l'  # ?
 ADD_SHELF = 'ads'
