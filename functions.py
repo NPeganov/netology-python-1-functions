@@ -48,8 +48,8 @@ def create_doc(num, type, owner, shelf):
 def read_doc_owner(doc_num):
     owner = None
     for document in documents:
-        if document['number'] == doc_num:
-            owner = document['name']
+        if document[NUMBER] == doc_num:
+            owner = document[NAME]
             return owner
     if owner is None:
         return 'Document\'s owner is not found '
@@ -69,8 +69,8 @@ def read_doc_info():
     result = ''
     for document in documents:
         for key, values in directories.items():
-            if document['number'] in values:
-                result += f'№: {document["number"]}, type: {document["type"]}, owner: {document["name"]}' \
+            if document[NUMBER] in values:
+                result += f'№: {document[NUMBER]}, type: {document[TYPE]}, owner: {document[NAME]}' \
                           f', storage shelf: {key} \n'
     return f'Current list of document: \n{result} '
 
@@ -121,7 +121,7 @@ def delete_shelf(shelf_num):
 def delete_doc(doc):
     a = None
     for document in reversed(range(len(documents))):
-        if documents[document]['number'] == doc:
+        if documents[document][NUMBER] == doc:
             del documents[document]
             a = document
     if a is None:
