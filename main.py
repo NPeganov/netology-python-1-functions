@@ -9,7 +9,7 @@ def factory(command):
     elif command in SHELF:
         doc_num = input('Enter number of the document: \n')
         return read_shelf(doc_num)
-    elif command in FULL_DOC_INFO:
+    elif command in LIST:
         return read_doc_info()
     elif command in ADD_SHELF:
         new_shelf_num = input('Enter number of the new shelf: \n')

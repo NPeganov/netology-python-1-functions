@@ -1,7 +1,7 @@
 PERSON = ['p', 'person']
 QUIT = ['q', 'quit']
 SHELF = ['s', 'shelf']
-FULL_DOC_INFO = ['l']  # ?
+LIST = ['l', 'list']
 ADD_SHELF = ['ads', 'add shelf']
 DELETE_SHELF = ['ds', 'delete shelf']
 ADD_DOCUMENT = ['ad', 'add document']
