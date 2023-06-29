@@ -18,8 +18,8 @@ def show_list_of_commands():
                 'l': 'to show full information of the document',
                 'ads': 'to add a new shelf',
                 'ds': 'to delete a shelf',
-                'ad': 'to add a new doc',  # !
-                'd': 'to delete a document',  # !
+                'ad': 'to add a new document',
+                'd': 'to delete a document',
                 'm': 'to move the document from one shelf to another',
                 'lof': 'to show full list of commands'}
 
@@ -149,7 +149,7 @@ def user_interaction():
     add_shelf = 'ads'
     delete_shelf = 'ds'
     add_doc = 'ad'
-    document = 'd'
+    delete = 'd'
     move = 'm'
     list_of_coms = 'lof'
     clod = '\nCurrent list of document:'
@@ -173,12 +173,12 @@ def user_interaction():
             print(show_full_doc_info())
         elif command == add_doc:
             _num = input('Enter the number of a new document: \n')
-            _type = input('Enter the type of the document \n')
-            _owner = input('Enter the name of the document\'s owner \n')
-            _shelf = input('Enter the number of a shelf to place the document \n')
+            _type = input('Enter the type of the document: \n')
+            _owner = input('Enter the name of the document\'s owner: \n')
+            _shelf = input('Enter the number of a shelf to place the document: \n')
             print(add_new_doc(_num, _type, _owner, _shelf), clod)
             print(show_full_doc_info())
-        elif command == document:
+        elif command == delete:
             doc_to_be_deleted = input('Enter number of a document to delete it: \n')
             print(delete_doc(doc_to_be_deleted), clod)
             print(show_full_doc_info())
@@ -196,5 +196,5 @@ def user_interaction():
 
 
 if __name__ == '__main__':
-    show_list_of_commands()
+    print(show_list_of_commands())
     user_interaction()
