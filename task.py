@@ -67,6 +67,8 @@ def current_list_of_shelves():
             shelves += f'{key}'
         else:
             shelves += f'{key}, '
+
+    a = f'Current list of shelves: {shelves}' #!
     return f'Current list of shelves: {shelves}'
 
 
@@ -89,7 +91,8 @@ def delete_a_shelf(shelf_num):
     if shelf_num not in directories:
         return 'The shelf doesn\'t exist'
     if directories[shelf_num] != list():
-        return 'There are documents on the shelf, remove them before removing the shelf (print d to remove a document).'
+        return 'There are documents on the shelf, remove them before removing the shelf' \
+               ' (print "d" to remove a document).'
     del directories[shelf_num]
     return 'The shelf was deleted.'
 
@@ -140,53 +143,53 @@ def move_doc(doc, shelf):
 def user_interaction():
     command = None
     person = 'p'
-    finish = 'q'
-    on_which_shelf = 's'
+    quit = 'q'
+    shelf = 's'
     full_doc_info = 'l'
-    new_shelf = 'ads'
+    add_shelf = 'ads'
     delete_shelf = 'ds'
-    doc_to_be_added = 'ad'
-    d = 'd'
-    m = 'm'
+    add_doc = 'ad'
+    document = 'd'
+    move = 'm'
     list_of_coms = 'lof'
     clod = '\nCurrent list of document:'
 
-    while command != finish:
+    while command != quit:
         command = input('Enter the command, please: \n').lower()
         if command == person:
             doc_num = input('Enter number of the document: \n')
             print(show_doc_owner(doc_num))
-        elif command == on_which_shelf:
+        elif command == shelf:
             doc_num = input('Enter number of the document: \n')
             print(show_shelf_of_doc(doc_num))
         elif command == full_doc_info:
             print(show_full_doc_info())
-        elif command == new_shelf:
+        elif command == add_shelf:
             new_shelf_num = input('Enter number of the new shelf: \n')
             print(add_new_shelf(new_shelf_num))
         elif command == delete_shelf:
             to_be_deleted_shelf_num = input('Enter number of the shelf to delete: \n')
             print(delete_a_shelf(to_be_deleted_shelf_num), clod)
             print(show_full_doc_info())
-        elif command == doc_to_be_added:
-            num = input('Enter the number of a new document: \n')
-            type = input('Enter the type of the document \n')
-            owner = input('Enter the name of the document\'s owner \n')
-            shelf = input('Enter the number of a shelf to place the document \n')
-            print(add_new_doc(num, type, owner, shelf), clod)
+        elif command == add_doc:
+            _num = input('Enter the number of a new document: \n')
+            _type = input('Enter the type of the document \n')
+            _owner = input('Enter the name of the document\'s owner \n')
+            _shelf = input('Enter the number of a shelf to place the document \n')
+            print(add_new_doc(_num, _type, _owner, _shelf), clod)
             print(show_full_doc_info())
-        elif command == d:
+        elif command == document:
             doc_to_be_deleted = input('Enter number of a document to delete it: \n')
             print(delete_doc(doc_to_be_deleted), clod)
             print(show_full_doc_info())
-        elif command == m:
+        elif command == move:
             doc_to_move = input('Enter number of a document to move it: \n')
-            shelf = input('Enter number of the shelf where to move: \n')
-            print(move_doc(doc_to_move, shelf), clod)
+            _shelf = input('Enter number of the shelf where to move: \n')
+            print(move_doc(doc_to_move, _shelf), clod)
             print(show_full_doc_info())
         elif command == list_of_coms:
             print(show_list_of_commands())
-        elif command == finish:
+        elif command == quit:
             print('The program stopped')
         else:
             print('This command doesn\'t exist \nPrint \'lof\' to see the list of commands')
