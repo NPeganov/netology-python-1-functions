@@ -2,8 +2,7 @@ from constants import *
 from functions import *
 
 
-def factory():
-    command = input('Enter the command, please: \n').lower()
+def factory(command):
     if command in PERSON:
         doc_num = input('Enter number of the document: \n')
         return read_doc_owner(doc_num)
@@ -20,9 +19,9 @@ def factory():
         return delete_shelf(to_be_deleted_shelf_num) + read_doc_info()
     elif command in ADD_DOCUMENT:
         _num = input('Enter the number of a new document: \n')
-        _type = input('Enter the type of the document \n')
-        _owner = input('Enter the name of the document\'s owner \n')
-        _shelf = input('Enter the number of a shelf to place the document \n')
+        _type = input('Enter the type of the document: \n')
+        _owner = input('Enter the name of the document\'s owner: \n')
+        _shelf = input('Enter the number of a shelf to place the document: \n')
         return create_doc(_num, _type, _owner, _shelf) + read_doc_info()
     elif command in DELETE:
         doc_to_be_deleted = input('Enter number of a document to delete it: \n')
@@ -34,16 +33,17 @@ def factory():
     elif command in LIST_OF_COMS:
         return read_commands_list()
     else:
-        return 'This command doesn\'t exist \nPrint \'lof\' to see the list of commands'
+        return 'This command doesn\'t exist. \nPrint \'lof\' to see the list of commands.'
 
 
 def user_interaction():
     command = None
     while command not in QUIT:
-        if command in QUIT:  # Tf is going on here
-            print('The program stopped')
+        command = input('Enter the command, please: \n').lower()
+        if command in QUIT:
+            print('The program stopped.')
         else:
-            print(factory())
+            print(factory(command))
 
 
 if __name__ == '__main__':

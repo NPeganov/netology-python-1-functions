@@ -1,4 +1,3 @@
-import logging
 from constants import COMMANDS, NUMBER, TYPE, NAME
 
 
@@ -18,7 +17,7 @@ directories = {
 def create_shelf(new_num):
     for _ in directories:
         if new_num == _:
-            return 'The shelf already exists'
+            return 'The shelf already exists '
     directories[new_num] = []
     shelves = ''
     last_key = list(directories.keys())[-1]
@@ -27,12 +26,12 @@ def create_shelf(new_num):
             shelves += f'{key}'
         else:
             shelves += f'{key} '
-    return f'The shelf was successfully added. {read_shelf_list()}'
+    return f'The shelf was successfully added. {read_shelf_list()} '
 
 
 def create_doc(num, type, owner, shelf):
     if shelf not in directories:
-        return 'The shelf doesn\'t exist. To add a shelf print \'ads\''
+        return 'The shelf doesn\'t exist. To add a shelf print \'ads\' '
     owner = owner.split(' ')
     for word in range(len(owner)):
         owner[word] = owner[word].capitalize()
@@ -43,7 +42,7 @@ def create_doc(num, type, owner, shelf):
     document[NAME] = owner
     documents.append(document)
     directories[shelf].append(num)
-    return 'The document was successfully added!'
+    return 'The document was successfully added! '
 
 
 def read_doc_owner(doc_num):
@@ -53,7 +52,7 @@ def read_doc_owner(doc_num):
             owner = document['name']
             return owner
     if owner is None:
-        return 'Document owner is not found'
+        return 'Document\'s owner is not found '
 
 
 def read_shelf(doc_num):
@@ -63,7 +62,7 @@ def read_shelf(doc_num):
             shelf = key
             return shelf
     if shelf is None:
-        return 'Document is not found'
+        return 'Document is not found '
 
 
 def read_doc_info():
@@ -73,7 +72,7 @@ def read_doc_info():
             if document['number'] in values:
                 result += f'№: {document["number"]}, type: {document["type"]}, owner: {document["name"]}' \
                           f', storage shelf: {key} \n'
-    return f'Current list of document: \n{result}'
+    return f'Current list of document: \n{result} '
 
 
 def read_shelf_list():
@@ -85,8 +84,7 @@ def read_shelf_list():
         else:
             shelves += f'{key}, '
 
-    a = f'Current list of shelves: {shelves}' #!
-    return f'Current list of shelves: {shelves}'
+    return f'Current list of shelves: {shelves} '
 
 
 def read_commands_list():
@@ -98,14 +96,16 @@ def read_commands_list():
 
 def update_doc(doc, shelf):
     a = None
+    if doc in directories[shelf]:
+        return f'The document is already on shelf {shelf}. '
     for d in directories.values():
         if doc in d:
             d.remove(doc)
             a = d
     if a is None:
-        return 'The document wasn\'t found on the shelf'
+        return 'The document wasn\'t found on the shelf. '
     directories[shelf].append(doc)
-    return 'The document was successfully moved!'
+    return 'The document was successfully moved!. '
 
 
 def delete_shelf(shelf_num):
@@ -113,9 +113,9 @@ def delete_shelf(shelf_num):
         return 'The shelf doesn\'t exist'
     if directories[shelf_num] != list():
         return 'There are documents on the shelf, remove them before removing the shelf' \
-               ' (print "d" to remove a document).'
+               ' (print "d" to remove a document). '
     del directories[shelf_num]
-    return 'The shelf was deleted.'
+    return 'The shelf was deleted. '
 
 
 def delete_doc(doc):
@@ -125,9 +125,9 @@ def delete_doc(doc):
             del documents[document]
             a = document
     if a is None:
-        return 'The document doesn\'t exist'
+        return 'The document doesn\'t exist '
     for d in directories.values():
         if doc in d:
             d.remove(doc)
 
-    return 'The document is successfully deleted!'
+    return 'The document is successfully deleted! '
