@@ -1,13 +1,13 @@
-PERSON = ['p', 'person']
-QUIT = ['q', 'quit']
-SHELF = ['s', 'shelf']
-LIST = ['l', 'list']
-ADD_SHELF = ['ads', 'add shelf']
-DELETE_SHELF = ['ds', 'delete shelf']
-ADD_DOCUMENT = ['ad', 'add document']
-DELETE = ['d', 'delete']
-MOVE = ['m', 'move']
-LIST_OF_COMS = ['lof', 'list of commands']
+PERSON_COM = ['p', 'person']
+QUIT_COM = ['q', 'quit']
+SHELF_COM = ['s', 'shelf']
+LIST_COM = ['l', 'list']
+ADD_SHELF_COM = ['ads', 'add shelf']
+DELETE_SHELF_COM = ['ds', 'delete shelf']
+ADD_DOCUMENT_COM = ['ad', 'add document']
+DELETE_COM = ['d', 'delete']
+MOVE_COM = ['m', 'move']
+LIST_OF_COMS_COM = ['lof', 'list of commands']
 
 COMMANDS = {'q': 'to finish the program',
             'p': 'to show who owns the document',
@@ -20,6 +20,6 @@ COMMANDS = {'q': 'to finish the program',
             'm': 'to move the document from one shelf to another',
             'lof': 'to show full list of commands'}
 
-NUMBER = 'number'
-NAME = 'name'
-TYPE = 'type'
+K_NUMBER = 'number'
+K_NAME = 'name'
+K_TYPE = 'type'
