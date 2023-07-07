@@ -1,15 +1,15 @@
 from constants import QUIT_COM, LIST_OF_COMS_COM
-from list_doc_info import list_commands
 from variables import *
+from main import main_loop
 
 
 def input_handler_shelf(text=''):
     shelf = input(text)
     while shelf not in directories:
         if shelf in QUIT_COM:
-            quit('The program stopped.')
+            main_loop(command='q')
         elif shelf in LIST_OF_COMS_COM:
-            list_commands()
+            main_loop(command='lof')
             break
         else:
             print('The shelf doesn\'t exist. To add a shelf type \'ads\' ')
@@ -27,10 +27,9 @@ def input_handler_doc(text=''):
         numbers.extend(num)
     while doc not in numbers:
         if doc in QUIT_COM:
-            quit('The program stopped.')
+            main_loop(command='q')
         elif doc in LIST_OF_COMS_COM:
-            list_commands()
-            break
+            main_loop(command='lof')
         else:
             print('The document doesn\'t exist. To add a document type \'ads\' ')
             doc = input(text)

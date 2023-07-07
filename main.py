@@ -4,10 +4,10 @@ from shelf_doc_creation import create_doc, create_shelf
 from list_doc_info import list_commands, list_doc_info
 
 
-def main_loop():
-    command = None
+def main_loop(command=None):
     while command not in QUIT_COM:
-        command = input('Enter the command, please: \n').lower()
+        if command is None:
+            command = input('Enter the command, please: \n').lower()
         if command in PERSON_COM:
             result = get_doc_owner()
             if result is not None:
@@ -40,9 +40,10 @@ def main_loop():
         elif command in LIST_OF_COMS_COM:
             list_commands()
         elif command in QUIT_COM:
-            print('The program stopped.')
+            quit('The program stopped.')
         else:
             print('This command doesn\'t exist. \nPrint \'lof\' to see the list of commands. \n')
+        command = input('Enter the command, please: \n').lower()
 
 
 if __name__ == '__main__':
