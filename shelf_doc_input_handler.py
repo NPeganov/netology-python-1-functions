@@ -1,19 +1,14 @@
 from constants import QUIT_COM, LIST_OF_COMS_COM
-from variables import *
-from main import main_loop
+from global_variables import *
+from list_doc_info import list_commands
 
 
-def input_handler_shelf(text=''):
+def input_handler_shelf(should_exist, text=''):
     shelf = input(text)
-    while shelf not in directories:
-        if shelf in QUIT_COM:
-            main_loop(command='q')
-        elif shelf in LIST_OF_COMS_COM:
-            main_loop(command='lof')
-            break
-        else:
-            print('The shelf doesn\'t exist. To add a shelf type \'ads\' ')
-            shelf = input(text)
+    if should_exist:
+        shelf = input_initialization(shelf, 'shelf', directories, text, '"ads"')
+    else:
+        shelf = input_initialization(shelf, 'shelf', directories, text, '"ads"')
     return shelf
 
 
@@ -25,13 +20,18 @@ def input_handler_doc(text=''):
         document.append(value)
     for num in document:
         numbers.extend(num)
-    while doc not in numbers:
-        if doc in QUIT_COM:
-            main_loop(command='q')
-        elif doc in LIST_OF_COMS_COM:
-            main_loop(command='lof')
-        else:
-            print('The document doesn\'t exist. To add a document type \'ads\' ')
-            doc = input(text)
-
+        doc = input_initialization(doc, 'document', numbers, text, '"ad"')
     return doc
+
+
+def input_initialization(obj, name, storage, text, command):
+    while obj not in storage:
+        if obj in QUIT_COM:
+            quit('The program stopped.')
+        elif obj in LIST_OF_COMS_COM:
+            list_commands()
+            break
+        else:
+            print(f'The {name} doesn\'t exist. To add a {name} type {command} ')
+            obj = input(text)
+    return obj

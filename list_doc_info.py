@@ -1,4 +1,4 @@
-from variables import *
+from global_variables import *
 from constants import *
 
 

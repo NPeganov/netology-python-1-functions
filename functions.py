@@ -1,6 +1,6 @@
 from constants import K_NUMBER, K_NAME
 from shelf_doc_input_handler import *
-from variables import *
+from global_variables import *
 
 
 def read_doc_by_number(doc_num):
