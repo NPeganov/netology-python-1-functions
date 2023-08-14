@@ -46,6 +46,7 @@ def update_shelf(changes):
             else:
                 # Меняем полку
                 directories[changed] = directories.pop(current)
+                # Меняем значение с безуспешного, на новое там, где в общем то всё успешно
                 result[changed] = directories[changed]
         return result
 
