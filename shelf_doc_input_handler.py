@@ -1,6 +1,7 @@
 from constants import QUIT_COM, LIST_OF_COMS_COM
 from global_variables import *
 from list_doc_info import list_commands
+from number_input import is_number
 
 
 def input_handler_shelf(should_exist, text=''):

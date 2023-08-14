@@ -3,7 +3,7 @@ from shelf_doc_input_handler import input_handler_shelf
 from global_variables import *
 from list_doc_info import list_commands
 from functions import read_doc_by_number
-from integer_input import input_integer
+from number_input import input_number
 
 
 def create_doc():
@@ -27,7 +27,7 @@ def create_doc():
 
 def input_handler_num():
     num = input('Enter the number of a new document: \n')
-    while not input_integer(num):
+    while not input_number(num):
         if num in QUIT_COM:
             quit('The program stopped.')
         elif num in LIST_OF_COMS_COM:

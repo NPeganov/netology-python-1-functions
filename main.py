@@ -4,7 +4,8 @@ from shelf_doc_creation import create_doc, create_shelf
 from list_doc_info import list_commands, list_doc_info
 
 
-def main_loop(command=None):
+def main_loop():
+    command = None
     while command not in QUIT_COM:
         if command is None:
             command = input('Enter the command, please: \n').lower()

@@ -1,7 +1,7 @@
 import re
 
 
-def input_integer(some_input):
+def is_number(some_input):
     regex = r'[-+]?\d+'
     if re.fullmatch(regex, some_input):
         result = True
