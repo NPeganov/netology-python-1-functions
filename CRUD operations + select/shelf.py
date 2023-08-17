@@ -36,6 +36,7 @@ def update_shelf(changes):
     if not isinstance(changes, dict):
         logging.error('Dictionary expected')
     else:
+        # Создаём словарь с ключами соответствующими ключам входного словаря (полки)
         result = dict.fromkeys(changes.values(), 'unsuccessful')
         for current, changed in changes.items():
             if not select_shelf(current):
@@ -43,7 +44,9 @@ def update_shelf(changes):
             elif select_shelf(changed):
                 logging.error('This shelf already exists')
             else:
+                # Меняем полку
                 directories[changed] = directories.pop(current)
+                # Меняем значение с безуспешного, на новое там, где в общем то всё успешно
                 result[changed] = directories[changed]
         return result
 
@@ -58,6 +61,3 @@ def delete_shelf(*nums):
                 "\nP.s. You can see which documents are on thr shelf (l).")
         else:
             del directories[num]
-
-
-print(select_shelf('1', '2'))
