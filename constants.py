@@ -1,13 +1,13 @@
-PERSON_COM = ['p', 'person']
-QUIT_COM = ['q', 'quit']
-SHELF_COM = ['s', 'shelf']
-LIST_COM = ['l', 'list']
-ADD_SHELF_COM = ['ads', 'add shelf']
-DELETE_SHELF_COM = ['ds', 'delete shelf']
-ADD_DOCUMENT_COM = ['ad', 'add document']
-DELETE_COM = ['d', 'delete']
-MOVE_COM = ['m', 'move']
-LIST_OF_COMS_COM = ['lof', 'list of commands']
+COM_PERSON = ['p', 'person']
+COM_QUIT = ['q', 'quit']
+COM_SHELF = ['s', 'shelf']
+COM_LIST = ['l', 'list']
+COM_ADD_SHELF = ['ads', 'add shelf']
+COM_DELETE_SHELF = ['ds', 'delete shelf']
+COM_ADD_DOCUMENT = ['ad', 'add document']
+COM_DELETE = ['d', 'delete']
+COM_MOVE = ['m', 'move']
+COM_LIST_OF_COMS = ['lof', 'list of commands']
 
 COMMANDS = {'q': 'to finish the program',
             'p': 'to show who owns the document',
@@ -20,8 +20,8 @@ COMMANDS = {'q': 'to finish the program',
             'm': 'to move the document from one shelf to another',
             'lof': 'to show full list of commands'}
 
-K_NUMBER = 'number'
-K_NAME = 'name'
-K_TYPE = 'type'
-K_SHELF = 'shelf'
-KEYS = [K_TYPE, K_NUMBER, K_NAME, K_SHELF]
+KEY_NUMBER = 'number'
+KEY_NAME = 'name'
+KEY_TYPE = 'type'
+KEY_SHELF = 'shelf'
+KEYS = [KEY_TYPE, KEY_NUMBER, KEY_NAME, KEY_SHELF]
