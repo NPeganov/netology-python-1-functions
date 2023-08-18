@@ -43,8 +43,6 @@ def _select_document(where):
     except TypeError:
         print('A dict expected.', traceback.print_exc())
 
-res = _select_document({KEY_NUMBER: '11-2'})
-
 
 def create_document(num, name, type, shelf):
     if _select_document({KEY_NUMBER: num}) is None:
@@ -71,7 +69,11 @@ def create_document(num, name, type, shelf):
 
 
 def read_document(where):
-    return copy.deepcopy(_select_document(where))
+    document_tuple = copy.deepcopy(_select_document(where))[0]
+    documents_info = document_tuple[0]
+    directories_info = document_tuple[1]
+    result = documents_info | directories_info
+    return result
 
 
 def update_document(doc, where):
