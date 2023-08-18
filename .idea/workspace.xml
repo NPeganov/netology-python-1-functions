@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2a0bffc8-460f-4b46-8ab2-14046f8a1d96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRUD operations + select/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRUD operations + select/document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRUD operations + select/shelf.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRUD operations + select/shelf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/global_variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/global_variables.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +30,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
@@ -49,10 +50,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "the__real__CRUD",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/vpega/Desktop/Programming/Нетология/Python/netology-python-1-functions"
+    "last_opened_file_path": "C:/Users/vpega/Desktop/Programming/Нетология/Python/netology-python-1-functions",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
-  <component name="RunManager" selected="Python tests.Python tests for test.MyTestCase.test4">
+  <component name="RunManager">
     <configuration name="Python tests for test.MyTestCase.test4" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="netology-python-1-functions" />
       <option name="INTERPRETER_OPTIONS" value="" />

@@ -1,6 +1,8 @@
 from global_variables import *
 from constants import *
 import logging
+import copy
+import traceback
 
 
 # input:
@@ -18,61 +20,69 @@ import logging
 #   result_dict_2
 #   ...]
 
-def select_document(where):
-    if not isinstance(where, dict):
-        logging.error('A dict expected.')
-    else:
+def _select_document(where):
+    # if not isinstance(where, dict):
+    #     logging.error('A dict expected.')
+    # else:
+    try:
         result = list()
+        result_from_dictionary = str()
         for key, value in where.items():
             for document in documents:
                 if document[key] == value:
                     # Поиск нужного документа
                     for shelf, docs in directories.items():
                         # Формирование вывода
-                        if document[K_NUMBER] in docs:
-                            document[K_SHELF] = shelf
-                    result.append(document)
+                        if document[KEY_NUMBER] in docs:
+                            result_from_dictionary = shelf
+                            break
+                    result.append((document, {KEY_SHELF: result_from_dictionary}))
         if len(result) == 0:
             result = None
         return result
+    except TypeError:
+        print('A dict expected.', traceback.print_exc())
+
+res = _select_document({KEY_NUMBER: '11-2'})
 
 
 def create_document(num, name, type, shelf):
-    if not select_document({K_NUMBER: num}):
-        logging.warning('Document with such number already exists')
+    if _select_document({KEY_NUMBER: num}) is None:
+        logging.warning(f'Document with such number ({num}) already exists')
     else:
-        for document in documents:
-            # Не актуально
-            if document[K_NAME] == name and document[K_TYPE] == type:
-                logging.warning('This person already has such document')
-            else:
-                break
+        # for document in documents:
+        #     Не актуально
+        #     if document[KEY_NAME] == name and document[KEY_TYPE] == type:
+        #         logging.warning('This person already has such document')
+        #     else:
+        #         break
         new_doc = dict()
         # Добавление нового документа
-        new_doc[K_TYPE] = type
-        new_doc[K_NAME] = name
-        new_doc[K_NUMBER] = num
+        new_doc[KEY_TYPE] = type
+        new_doc[KEY_NAME] = name
+        new_doc[KEY_NUMBER] = num
         documents.append(new_doc)
         directories[shelf].append(num)
-        result = {K_TYPE: type,
-                  K_NUMBER: num,
-                  K_NAME: name,
-                  K_SHELF: shelf}
+        result = {KEY_TYPE: type,
+                  KEY_NUMBER: num,
+                  KEY_NAME: name,
+                  KEY_SHELF: shelf}
         return result
 
 
 def read_document(where):
-    result = select_document(where)
-    return result
+    return copy.deepcopy(_select_document(where))
 
 
 def update_document(doc, where):
-    if not isinstance(where, dict) or not isinstance(doc, str | int | float):
-        logging.error('Different data type expected.')
-    else:
+    # if not isinstance(where, dict) or not isinstance(doc, str | int | float):
+    #     logging.error('Different data type expected.')
+    try:
+        document = _select_document({KEY_NUMBER: doc})[0]
+        result = list()
         for key, value in where.items():
-            # Поиск нудного документа
-            if key == K_SHELF:
+            # Поиск нужного документа
+            if key == KEY_SHELF:
                 # Апдейтим полку
                 for shelf, docs in directories.items():
                     if doc in docs:
@@ -81,33 +91,62 @@ def update_document(doc, where):
                     if shelf == key:
                         # Добавляем на новую
                         directories[docs].append(doc)
-            elif key in [K_TYPE, K_NUMBER, K_NAME]:
-                for document in documents:
-                    if key == K_TYPE:
-                        # Апдейтим тип
-                        documents[document][K_TYPE] = value
-                    elif key == K_NUMBER:
-                        # Апдейтим номер
-                        if value == document[K_NUMBER]:
-                            logging.error('Such document already exists')
-                        else:
-                            documents[document][K_NUMBER] = value
-                    else:
-                        # Апдейтим владельца
-                        documents[document][K_NAME] = value
-        return select_document({K_NUMBER: doc})
+                        result.append(doc)
+            elif key == KEY_TYPE:
+                document[0][KEY_TYPE] = value
+                result.append(doc)
+            elif key == KEY_NAME:
+                document[0][KEY_NAME] = value
+                result.append(doc)
+            elif key == KEY_NUMBER:
+                for doc in documents:
+                    if value in doc[KEY_NUMBER]:
+                        logging.error(f'Such document ({value}) already exists')
+                        break
+                document[0][KEY_NUMBER] = value
+                for shelf, docs in directories.items():
+                    if value in docs:
+                        docs.remove(value)
+                        docs.append(doc)
+                        result.append(doc)
+        return result
+
+        # for key, value in where.items():
+        #     # Поиск нужного документа
+        #     if key == KEY_SHELF:
+        #         # Апдейтим полку
+        #         for shelf, docs in directories.items():
+        #             if doc in docs:
+        #                 # Сначала убираем со старой полки
+        #                 docs.remove(doc)
+        #             if shelf == key:
+        #                 # Добавляем на новую
+        #                 directories[docs].append(doc)
+        #     elif key in [KEY_TYPE, KEY_NUMBER, KEY_NAME]:
+        #         for document in documents:
+        #             if key == KEY_TYPE:
+        #                 # Апдейтим тип
+        #                 documents[document][KEY_TYPE] = value
+        #             elif key == KEY_NUMBER:
+        #                 # Апдейтим номер
+        #                 if value == document[KEY_NUMBER]:
+        #                     logging.error(f'Such document ({value}) already exists')
+        #                 else:
+        #                     documents[document][KEY_NUMBER] = value
+        #             else:
+        #                 # Апдейтим владельца
+        #                 documents[document][KEY_NAME] = value
+        # return _select_document({KEY_NUMBER: doc})
+    except TypeError:
+        print('Different data type expected.', traceback.print_exc())
 
 
 def delete_document(num):
-    if not select_document({K_NUMBER: num}):
-        logging.error('This document doesn`t exist')
+    if _select_document({KEY_NUMBER: num}) is None:
+        logging.error(f'This document ({num}) doesn`t exist')
     else:
-        for document in documents:
-            if document[K_NUMBER] == num:
-                # Ищем нужный документ и удаляем из документов
-                documents.remove(document)
-            for d in directories.values():
-                # Аналогично со шкафом
-                if num in d:
-                    d.remove(num)
+        documents.remove(_select_document({KEY_NUMBER: num}))
+        for d in directories.values():
+            if num in d:
+                d.remove(num)
         return num
